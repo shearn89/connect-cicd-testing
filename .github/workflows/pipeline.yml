@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: setup aws creds
-        uses: aws-actions/configure-aws-credentials@1.7.0
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
           role-to-assume: ${{ secrets.ROLE_ARN }}
           role-session-name: github-actions-deploy
@@ -46,7 +46,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: setup aws creds
-        uses: aws-actions/configure-aws-credentials@1.7.0
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
           role-to-assume: ${{ secrets.ROLE_ARN }}
           role-session-name: github-actions-deploy
