@@ -6,10 +6,11 @@ on:
 jobs:
   # First, run the script that exports the Connect flows against account-one
   export-flows:
-    environment: account-one
     runs-on: ubuntu-latest
-    env:
-      AWS_DEFAULT_REGION: eu-west-2
+    environment: account-one
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
         with:
