@@ -6,8 +6,7 @@ on:
 jobs:
   # First, run the script that exports the Connect flows against account-one
   export-flows:
-    environment:
-      name: account-one
+    environment: account-one
     runs-on: ubuntu-latest
     env:
       AWS_DEFAULT_REGION: eu-west-2
@@ -34,9 +33,7 @@ jobs:
   deploy-flows:
     needs: export-flows
     runs-on: ubuntu-latest
-    environment:
-      name: account-two
-    concurrency: account-two
+    environment: account-two
     permissions:
       id-token: write
       contents: read
