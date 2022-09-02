@@ -32,7 +32,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
 
   deploy-flows:
-    needs: build
+    needs: export-flows
     runs-on: ubuntu-latest
     environment:
       name: account-two
