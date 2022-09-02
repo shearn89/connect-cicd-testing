@@ -1,0 +1,58 @@
+---
+name: Flow Deployer
+on:
+  workflow_dispatch:
+
+jobs:
+  # First, run the script that exports the Connect flows against account-one
+  export-flows:
+    environment:
+      name: account-one
+    runs-on: ubuntu-latest
+    env:
+      AWS_DEFAULT_REGION: eu-west-2
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: setup aws creds
+        uses: aws-actions/configure-aws-credentials@1.7.0
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN }}
+          role-session-name: github-actions-deploy
+          aws-region: eu-west-2
+          audience: ${{ secrets.AWS_AUDIENCE }}
+
+      - name: run some command
+        run: |
+          aws sts get-caller-identity
+
+      - name: commit changes back to repo??
+        uses: stefanzweifel/git-auto-commit-action@v4
+
+  deploy-flows:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: account-two
+    concurrency: account-two
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: setup aws creds
+        uses: aws-actions/configure-aws-credentials@1.7.0
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN }}
+          role-session-name: github-actions-deploy
+          aws-region: eu-west-2
+          audience: ${{ secrets.AWS_AUDIENCE }}
+
+      - name: run some command
+        run: |
+          aws sts get-caller-identity
