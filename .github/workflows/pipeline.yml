@@ -29,12 +29,12 @@ jobs:
           aws s3 ls
 
       - name: setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8 #install the python needed
-
-      - name: call export_cf python
+          python-version: '3.10' #install the python needed
+          cache: 'pip' # caching pip dependencies
         run: |
+          pip install boto3
           python export_cf.py
 
       - name: commit changes back to repo??
