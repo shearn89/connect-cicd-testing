@@ -28,6 +28,15 @@ jobs:
         run: |
           aws s3 ls
 
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 #install the python needed
+
+      - name: call export_cf python
+        run: |
+          python export_cf.py
+
       - name: commit changes back to repo??
         uses: stefanzweifel/git-auto-commit-action@v4
 
