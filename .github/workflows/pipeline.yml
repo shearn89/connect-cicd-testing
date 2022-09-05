@@ -33,6 +33,8 @@ jobs:
         with:
           python-version: '3.10' #install the python needed
           cache: 'pip' # caching pip dependencies
+      
+      - name: run python script  
         run: |
           pip install boto3
           python export_cf.py
